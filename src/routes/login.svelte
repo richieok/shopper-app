@@ -1,6 +1,8 @@
 <script>
+  import { goto } from "@sapper/app";
   import Form from "../components/Form.svelte";
   import Button from "../components/Button.svelte";
+
   let username = "";
   let password = "";
   $: data = {
@@ -12,6 +14,7 @@
     // console.log(`Username: ${username}\nPassword: ${password}`);
     let res = await fetch("http://localhost:5515/auth/signin", {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
@@ -20,6 +23,7 @@
     if (res.ok){
       let json = await res.json();
       console.log(json);
+      goto('/');
     } else {
       console.log(res.statusText);
     }
