@@ -1,19 +1,31 @@
+<script context="module">
+  export async function preload(page, session){
+    console.log('module');
+    console.log('nav session --> ');
+    console.log(session);
+    console.log(page);
+    return { tape: 'High'}
+  }
+</script>
+
 <script>
   import { onDestroy, afterUpdate, onMount, beforeUpdate } from "svelte";
-  import { stores } from "@sapper/app";
+  // import { stores } from "@sapper/app";
+
   export let segment;
-  $: console.log(segment);
+  // const { session } = stores();
+
+  let user;
+  // const unsubscribe = session.subscribe( value => user = value );
+
+  // $: console.log(user);
   let isLoggedIn = false;
   let timer;
-  beforeUpdate(() => {
-    console.log("Nav before update -->");
-  });
+  
   onMount(() => {
     
   });
-  onDestroy(() => {
-    
-  });
+  // onDestroy(unsubscribe);
 </script>
 
 <style>
