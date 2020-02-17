@@ -10,10 +10,10 @@
             body: JSON.stringify({})
         });
         if (res.ok){
+            session.update((existing)=>{
+                return {user: null};
+            })
             goto('/');
-            session.update( n => {
-                n.user = null;
-            });
         }
     })
 </script>

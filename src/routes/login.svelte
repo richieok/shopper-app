@@ -1,7 +1,5 @@
 <script context="module">
-  export async function preload(page, {user}){
-    return {user};
-  } 
+  
 </script>
 
 <script>
@@ -10,11 +8,7 @@
   import Button from "../components/Button.svelte";
   const { session } = stores();
 
-  export let user;
-
-  console.log('--> user ')
-  console.log(user);
-  // console.log(session);
+  
 
   let username = "";
   let password = "";
@@ -36,9 +30,7 @@
     if (res.ok){
       let json = await res.json();
       console.log(json);
-      session.update( n => {
-        n.user = json.user
-      });
+      
       goto('/');
     } else {
       console.log(res.statusText);

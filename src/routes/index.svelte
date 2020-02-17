@@ -3,23 +3,45 @@
   import { stores } from "@sapper/app";
   import ContactCard from "../components/ContactCard.svelte";
   const { session } = stores();
-  let isLoggedIn = false;
-  let state = null;
-  const unsubscribe = session.subscribe( value => {
-	  state = value;
-  })
-  function getStore(){
-    console.log('state -->');
-	  console.log(state);
+  // console.log(session);
+
+  let users = [];
+  let state;
+  const unsubscribe = session.subscribe(value => {
+    state = value.user;
+  });
+
+  $: {
+    if (state) {
+      updateDisplay();
+    }
   }
-  onMount( async ()=>{
-    const res = await fetch('http://localhost:5515', {
-      method: 'GET',
-      credentials: 'include'
-    });
-    if (res.ok){
+
+  const updateDisplay = async () => {
+    const res = await fetch("https://randomuser.me/api/?results=20");
+    if (res.ok) {
       const json = await res.json();
-      console.log(json);
+      users = json.results;
+    }
+  };
+
+  function getStore() {
+    console.log("state -->");
+    console.log(state);
+  }
+  function updateUser() {
+    // console.log('update user');
+    session.update(obj => {
+      return { user: { username: "Tom" } };
+    });
+  }
+  onMount(async () => {
+    if (state) {
+      const res = await fetch("https://randomuser.me/api/?results=20");
+      if (res.ok) {
+        const json = await res.json();
+        users = json.results;
+      }
     }
   });
   onDestroy(unsubscribe);
@@ -29,7 +51,7 @@
   @media (min-width: 480px) {
   }
   button {
-	  padding: 1rem;
+    padding: 1rem;
   }
 </style>
 
@@ -39,15 +61,13 @@
 
 <h2>Home</h2>
 <button on:click={getStore}>Check</button>
+<button on:click={updateUser}>Update user</button>
 
-
-<!-- {#each users as user}
-	<ContactCard>
-		<span slot='name'>
-			{user.name.first+' '+user.name.last}
-		</span>
-		<span slot='email'>
-			{user.email}
-		</span>
-	</ContactCard>
-{/each} -->
+{#if state}
+  {#each users as user}
+    <ContactCard>
+      <span slot="name">{user.name.first + ' ' + user.name.last}</span>
+      <span slot="email">{user.email}</span>
+    </ContactCard>
+  {/each}
+{/if}

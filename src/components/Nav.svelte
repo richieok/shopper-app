@@ -16,16 +16,7 @@
   // const { session } = stores();
 
   let user;
-  // const unsubscribe = session.subscribe( value => user = value );
-
-  // $: console.log(user);
-  let isLoggedIn = false;
-  let timer;
   
-  onMount(() => {
-    console.log('Nav on mount');
-  });
-  // onDestroy(unsubscribe);
 </script>
 
 <style>
