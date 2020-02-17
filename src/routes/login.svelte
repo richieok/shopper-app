@@ -1,14 +1,23 @@
 <script context="module">
-  
+
 </script>
 
 <script>
+  import { onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
   import Form from "../components/Form.svelte";
   import Button from "../components/Button.svelte";
   const { session } = stores();
+  let updatedUser;
+  const unsubscribe = session.subscribe(value => {
+    updatedUser = value.user;
+  });
 
-  
+  $: {
+    if ( updatedUser ){
+      goto('/');
+    }
+  }
 
   let username = "";
   let password = "";
@@ -20,22 +29,24 @@
   async function handleSubmit(e) {
     // console.log(`Username: ${username}\nPassword: ${password}`);
     let res = await fetch("http://localhost:5515/auth/signin", {
-      method: 'POST',
-      credentials: 'include',
+      method: "POST",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        "Content-Type": "application/json;charset=utf-8"
       },
       body: JSON.stringify(data)
     });
-    if (res.ok){
+    if (res.ok) {
       let json = await res.json();
       console.log(json);
-      
-      goto('/');
+
+      goto("/");
     } else {
       console.log(res.statusText);
     }
   }
+
+  onDestroy(unsubscribe)
 </script>
 
 <style>

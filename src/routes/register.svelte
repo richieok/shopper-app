@@ -1,6 +1,21 @@
 <script>
+  import { onDestroy } from "svelte";
+  import { stores, goto } from "@sapper/app";
   import Form from "../components/Form.svelte";
   import Button from "../components/Button.svelte";
+  const { session } = stores();
+
+  let updatedUser;
+  const unsubscribe = session.subscribe(value => {
+    updatedUser = value.user;
+  });
+
+  $: {
+    if ( updatedUser ){
+      goto('/');
+    }
+  }
+
   let fname = "";
   let lname = "";
   function handleSubmit(e){
