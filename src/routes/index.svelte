@@ -12,6 +12,16 @@
     console.log('state -->');
 	  console.log(state);
   }
+  onMount( async ()=>{
+    const res = await fetch('http://localhost:5515', {
+      method: 'GET',
+      credentials: 'include'
+    });
+    if (res.ok){
+      const json = await res.json();
+      console.log(json);
+    }
+  });
   onDestroy(unsubscribe);
 </script>
 

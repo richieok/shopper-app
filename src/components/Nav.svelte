@@ -23,7 +23,7 @@
   let timer;
   
   onMount(() => {
-    
+    console.log('Nav on mount');
   });
   // onDestroy(unsubscribe);
 </script>

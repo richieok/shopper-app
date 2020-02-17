@@ -30,15 +30,26 @@ app.use(session({
 	secret: 'YSTB536svb@#',
 	resave: false,
 	saveUninitialized: false,
-	store: store
+	store: store,
 }));
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+
+app.use((req, res, next)=>{
+	if(typeof req.session.user === 'undefined'){
+		req.session.user = false;
+	}
+	next();
+});
 
 app // You can also use Express
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
-		sapper.middleware()
+		sapper.middleware({
+			session: (req, res) => ({
+				user: req.session.user
+			})
+		})
 	)
 	.listen(PORT, err => {
 		if (err) console.log('error', err);
