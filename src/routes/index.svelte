@@ -36,13 +36,13 @@
     });
   }
   onMount(async () => {
-    if (state) {
-      const res = await fetch("https://randomuser.me/api/?results=20");
-      if (res.ok) {
-        const json = await res.json();
-        users = json.results;
-      }
-    }
+    // if (state) {
+    //   const res = await fetch("https://randomuser.me/api/?results=20");
+    //   if (res.ok) {
+    //     const json = await res.json();
+    //     users = json.results;
+    //   }
+    // }
   });
   onDestroy(unsubscribe);
 </script>
