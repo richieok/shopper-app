@@ -70,7 +70,7 @@
       <!-- <li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li> -->
     </ul>
     {#if user}
-      <p>Welcome, {user.username}</p>
+      <p>Welcome, {user.firstname}</p>
     {/if}
   </div>
 
