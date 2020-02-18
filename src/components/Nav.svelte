@@ -1,22 +1,14 @@
-<script context="module">
-  export async function preload(page, session){
-    console.log('module');
-    console.log('nav session --> ');
-    console.log(session);
-    console.log(page);
-    return { tape: 'High'}
-  }
-</script>
-
 <script>
-  import { onDestroy, afterUpdate, onMount, beforeUpdate } from "svelte";
-  // import { stores } from "@sapper/app";
+  import { onDestroy, onMount } from "svelte";
+  import { stores } from "@sapper/app";
 
   export let segment;
-  // const { session } = stores();
+  const { session } = stores();
 
   let user;
-  
+  const unsubscribe = session.subscribe(value => (user = value.user));
+
+  onDestroy(unsubscribe);
 </script>
 
 <style>
@@ -54,7 +46,7 @@
       <li>
         <a class:selected={segment === undefined} href=".">Home</a>
       </li>
-      <!-- {#if isLoggedIn} -->
+      {#if !user}
         <li>
           <a class:selected={segment === 'login'} href="login">Login</a>
         </li>
@@ -63,18 +55,23 @@
             Register
           </a>
         </li>
-      <!-- {/if} -->
+      {/if}
       <li>
         <a class:selected={segment === 'about'} href="about">About</a>
       </li>
-      <li>
-        <a href="logout" class:selected={segment === 'logout'}>Logout</a>
-      </li>
+      {#if user}
+        <li>
+          <a href="logout" class:selected={segment === 'logout'}>Logout</a>
+        </li>
+      {/if}
 
       <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
       <!-- <li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li> -->
     </ul>
+    {#if user}
+      <p>Welcome, {user.username}</p>
+    {/if}
   </div>
 
 </nav>

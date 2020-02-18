@@ -32,7 +32,7 @@
   function updateUser() {
     // console.log('update user');
     session.update(obj => {
-      return { user: { username: "Tom" } };
+      return { user: { username: "dmenace@qubit.com.ng" , firstname: 'Dennis'} };
     });
   }
   onMount(async () => {
@@ -61,7 +61,7 @@
 
 <h2>Home</h2>
 <button on:click={getStore}>Check</button>
-<button on:click={updateUser}>Update user</button>
+<!-- <button on:click={updateUser}>Update user</button> -->
 
 {#if state}
   {#each users as user}
@@ -70,4 +70,6 @@
       <span slot="email">{user.email}</span>
     </ContactCard>
   {/each}
+{:else}
+  <h2>Insecure Page</h2>
 {/if}

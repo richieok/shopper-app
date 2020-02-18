@@ -1,12 +1,9 @@
-<script context="module">
-
-</script>
-
 <script>
   import { onDestroy } from "svelte";
   import { goto, stores } from "@sapper/app";
   import Form from "../components/Form.svelte";
   import Button from "../components/Button.svelte";
+
   const { session } = stores();
   let updatedUser;
   const unsubscribe = session.subscribe(value => {
@@ -14,8 +11,8 @@
   });
 
   $: {
-    if ( updatedUser ){
-      goto('/');
+    if (updatedUser) {
+      goto("/");
     }
   }
 
@@ -39,14 +36,20 @@
     if (res.ok) {
       let json = await res.json();
       console.log(json);
-
-      goto("/");
+      if (json.state.user) {
+        session.update( existing => {
+          return { user: { username: json.state.user.username, firstname: json.state.user.firstname }}
+        })
+        goto("/");
+      } else {
+        console.log("Didn't work");
+      }
     } else {
       console.log(res.statusText);
     }
   }
 
-  onDestroy(unsubscribe)
+  onDestroy(unsubscribe);
 </script>
 
 <style>
