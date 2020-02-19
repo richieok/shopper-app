@@ -20,6 +20,7 @@
 
   export let segment;
   export let user;
+  let display = false;
   let updatedUser;
   console.log(user);
   const unsubscribe = session.subscribe(value => {
@@ -28,10 +29,11 @@
 
   onMount(() => {
     session.set({ user: user });
-    console.log('onMount');
+    console.log("onMount");
+    display = true;
     console.log(updatedUser);
   });
-  
+
   onDestroy(unsubscribe);
 </script>
 
@@ -41,10 +43,14 @@
   }
 </style>
 
-<Nav {segment} />
-{#if updatedUser}
-  <p>Username: {updatedUser.username}</p>
+{#if display}
+  <Nav {segment} />
+  {#if updatedUser}
+    <p>Username: {updatedUser.username}</p>
+  {/if}
+  <main>
+    <slot />
+  </main>
+{:else}
+  <h3>Loading</h3>
 {/if}
-<main>
-  <slot />
-</main>
