@@ -38,7 +38,13 @@
       console.log(json);
       if (json.state.user) {
         session.update( existing => {
-          return { user: { username: json.state.user.username, firstname: json.state.user.firstname }}
+          return { 
+            user: { 
+              username: json.state.user.username, 
+              firstname: json.state.user.firstname, 
+              id: json.state.user._id
+            }
+          }
         })
         goto("/");
       } else {
