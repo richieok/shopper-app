@@ -1,4 +1,5 @@
 <script>
+    export let _id;
     export let productName;
     export let images;
     export let brand;
