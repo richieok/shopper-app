@@ -40,15 +40,21 @@
 <style>
   main {
     min-height: 80vh;
+    background-color: cadetblue;
+  }
+  .container {
+    padding: 1em 1em;
   }
 </style>
 
 {#if display}
   <Nav {segment} />
-  {#if updatedUser}
-    <p>Username: {updatedUser.username}</p>
-  {/if}
   <main>
+    {#if updatedUser}
+      <div class="container">
+        <p>Username: {updatedUser.username}</p>
+      </div>
+    {/if}
     <slot />
   </main>
 {:else}
