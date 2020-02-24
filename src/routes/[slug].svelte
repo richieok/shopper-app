@@ -24,4 +24,6 @@
   {#each products as product}
     <ProductCard {...product} />
   {/each}
+{:else}
+  <h3>No products found</h3>
 {/if}

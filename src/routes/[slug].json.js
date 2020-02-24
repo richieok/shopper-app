@@ -1,4 +1,4 @@
-import Product from "./_product";
+import Products from "./_products";
 import mongoose from "mongoose";
 const uri = "mongodb+srv://qubitUser:ct2Iilr5ddAVgo2H@cluster0-z8ae8.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -17,7 +17,7 @@ export async function get(req, res, next) {
     const { slug } = req.params;
     console.log(slug);
     if (slug === "products") {
-        Product.find({}).then(data => {
+        Products.find({}).then(data => {
             res.writeHead(200, {
                 'Content-Type': 'application/json'
             });
@@ -29,6 +29,13 @@ export async function get(req, res, next) {
             res.end(JSON.stringify({
                 message: "Not found"
             }));
+        });
+    } else {
+        Products.find({ productParam: slug }).then(data => {
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.end(JSON.stringify(data));
         });
     }
 }

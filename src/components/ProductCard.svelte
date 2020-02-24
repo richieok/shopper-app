@@ -5,6 +5,7 @@
     export let brand;
     export let price;
     export let sizes;
+    export let productParam;
 </script>
 
 <style>
@@ -27,7 +28,7 @@
 
 <article>
   <h3>
-    <a href="/products">{productName}</a>
+    <a href="/{productParam}">{productName}</a>
   </h3>
   <img class="center" src={images[0].url} alt={images[0].alt} width={images[0].width} height={images[0].height}>
 </article>
