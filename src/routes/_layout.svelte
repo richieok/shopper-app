@@ -40,7 +40,7 @@
 <style>
   main {
     min-height: 80vh;
-    background-color: cadetblue;
+    background-color: rgb(197, 228, 232);
   }
   .container {
     padding: 1em 1em;

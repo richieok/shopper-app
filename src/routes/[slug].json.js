@@ -1,4 +1,4 @@
-import Products from "./_products";
+import Products from "./_product";
 import mongoose from "mongoose";
 const uri = "mongodb+srv://qubitUser:ct2Iilr5ddAVgo2H@cluster0-z8ae8.mongodb.net/test?retryWrites=true&w=majority";
 

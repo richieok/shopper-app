@@ -9,10 +9,14 @@
 </script>
 
 <style>
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  .container {
+    padding: 1em;
+    box-shadow: 10px 10px rgba(97, 96, 95, 0.3);
+    margin: 10px;
+    background-color: beige;
+  }
+  img {
+    border: solid 2px grey;
   }
   a {
     text-decoration: none;
@@ -26,9 +30,9 @@
   }
 </style>
 
-<article>
+<article class="container">
   <h3>
     <a href="/{productParam}">{productName}</a>
   </h3>
-  <img class="center" src={images[0].url} alt={images[0].alt} width={images[0].width} height={images[0].height}>
+  <img src="https://marketplaceapp-test-bucket.s3.eu-west-2.amazonaws.com/public/{images[0].url}" alt={images[0].alt} width="200px" >
 </article>

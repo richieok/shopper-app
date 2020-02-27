@@ -16,14 +16,24 @@
   console.log(products);
 </script>
 
+<style>
+  .container {
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: space-between; */
+  }
+</style>
+
 <svelte:head>
   <title>Products</title>
 </svelte:head>
 
-{#if products}
-  {#each products as product}
-    <ProductCard {...product} />
-  {/each}
-{:else}
-  <h3>No products found</h3>
-{/if}
+<div class="container">
+  {#if products}
+    {#each products as product}
+      <ProductCard {...product} />
+    {/each}
+  {:else}
+    <h3>No products found</h3>
+  {/if}
+</div>
