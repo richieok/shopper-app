@@ -73,8 +73,6 @@
 {:else}
   <h2>Products</h2>
   <div>
-    <h3>Nike Red-and-Black</h3>
-    <img src="https://marketplaceapp-test-bucket.s3.eu-west-2.amazonaws.com/public/red-and-black-nike-running-shoe.jpg" alt="red-and-black-nike-running-shoe">
+    <h3>Insecure</h3>
   </div>
-  
 {/if}
