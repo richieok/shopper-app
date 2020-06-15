@@ -5,7 +5,7 @@
       const json = await res.json();
       return { products: json };
     } else {
-      return { product: false };
+      return { products: false };
     }
   }
 </script>
