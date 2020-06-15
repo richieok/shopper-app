@@ -6,6 +6,7 @@
     button {
         width: 5rem;
         padding: 0.5rem 0px;
+        margin: 0.5rem 0px;
         border-radius: 6px;
     }
 </style>

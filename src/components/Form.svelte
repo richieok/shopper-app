@@ -2,8 +2,10 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
+  export let enctype = null;
+
   function handleSubmit() {
-    console.log('Form Submit');
+    console.log("Form Submit");
     dispatch("submit", {});
   }
 </script>
@@ -21,8 +23,16 @@
   }
 </style>
 
-<div class="container">
-  <form on:submit|preventDefault={handleSubmit}>
-    <slot>Form</slot>
-  </form>
-</div>
+{#if !enctype}
+  <div class="container">
+    <form on:submit|preventDefault={handleSubmit}>
+      <slot>Form</slot>
+    </form>
+  </div>
+{:else}
+  <div class="container">
+    <form on:submit|preventDefault={handleSubmit} {enctype}>
+      <slot>Form</slot>
+    </form>
+  </div>
+{/if}
