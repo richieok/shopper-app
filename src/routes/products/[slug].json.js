@@ -1,4 +1,4 @@
-import Products from "./_product";
+import Products from "../_product";
 import mongoose from "mongoose";
 const uri = "mongodb+srv://qubitUser:ct2Iilr5ddAVgo2H@cluster0-z8ae8.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -11,7 +11,7 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, ", 'MongoDB connection error:"));
 
-console.log('[slug].json.js');
+console.log('products/[slug].json.js');
 
 export async function get(req, res, next) {
     const { slug } = req.params;

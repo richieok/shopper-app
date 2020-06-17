@@ -1,15 +1,25 @@
 <script context="module">
-    export function preload({ params, query }){
-        return this.fetch(`shop.json`).then( r => r.json()).then( data => {
-            return { data };
-        });
-    }
+  export function preload({ params, query }) {
+    return this.fetch(`shop.json`)
+      .then(r => r.json())
+      .then(data => {
+        return { data };
+      });
+  }
 </script>
 
 <script>
-    export let data;
+  export let data;
 </script>
 
 <svelte:head>
-    <title>Shop</title>
+  <title>Shop</title>
 </svelte:head>
+
+<!-- <ul>
+  {#if data}
+    {#each data.categories as category}
+        <li>category</li>
+    {/each}
+  {/if}
+</ul> -->
