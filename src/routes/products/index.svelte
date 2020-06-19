@@ -3,10 +3,10 @@
     console.log('context module');
     const res = await this.fetch(`products.json`);
     if (res.ok) {
-      const products = await res.json();
+      const data = await res.json();
       console.log('print json');
-      console.log(json);
-      return { products };
+      console.log(data);
+      return { products: data };
     } else {
       console.log('product is false');
       return { products: false };

@@ -21,7 +21,7 @@ export function get(req, res) {
         'Content-Type': 'application/json'
     });
 
-    res.end( out );
-    console.log('products/index.json');
-    console.log(out);
+    res.end( JSON.stringify(out) );
+    // console.log('products/index.json');
+    // console.log(out);
 }
